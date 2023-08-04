@@ -27,7 +27,7 @@
     "@types/node": "^20.4.6",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vitejs/plugin-react": "^1.0.7",
+    "@vitejs/plugin-react": "^4.0.4",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.2",
     "camelcase": "6",
