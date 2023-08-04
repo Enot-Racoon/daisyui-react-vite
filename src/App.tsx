@@ -2,7 +2,7 @@ import React from 'react'
 
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
-import taillwindLogo from './assets/tailwind.svg'
+import tailwindLogo from './assets/tailwind.svg'
 
 import './App.css'
 
@@ -15,15 +15,15 @@ const App = () => {
       <div className="App">
         <header className="App-header">
           <div className="flex">
-            <a href="https://vitejs.dev" target="_blank">
+            <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
               <img src={viteLogo} className="logo" alt="Vite logo" />
             </a>
-            <a href="https://react.dev" target="_blank">
+            <a href="https://react.dev" target="_blank" rel="noreferrer">
               <img src={reactLogo} className="logo react" alt="React logo" />
             </a>
-            <a href="https://tailwindcss.com" target="_blank">
+            <a href="https://tailwindcss.com" target="_blank" rel="noreferrer">
               <img
-                src={taillwindLogo}
+                src={tailwindLogo}
                 className="logo tailwind"
                 alt="Tailwind logo"
               />

@@ -1,4 +1,4 @@
-// noinspection ES6UnusedImports
+// @ts-ignore
 import React from 'react'
 
 import { render, screen } from '@testing-library/react'
@@ -12,9 +12,9 @@ test('Renders main page correctly', async () => {
   // Setup
   render(<App />)
   const buttonCount = await screen.findByRole('button')
-  const codeCount = screen.queryByText(/The count is now:/)
+  const codeCount = await screen.queryByText(/The count is now:/)
 
-  // Pre Expecations
+  // Pre Expectations
   expect(buttonCount.innerHTML).toBe('count is: 0')
   expect(codeCount).not.toBeInTheDocument()
 
@@ -25,5 +25,5 @@ test('Renders main page correctly', async () => {
 
   // Post Expectations
   expect(buttonCount.innerHTML).toBe('count is: 3')
-  expect(screen.queryByText(/The count is now:/)).toBeInTheDocument()
+  expect(await screen.queryByText(/The count is now:/)).toBeInTheDocument()
 })
