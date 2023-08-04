@@ -7,11 +7,39 @@ export default {
     '!jest/mocks/**',
   ],
   coveragePathIgnorePatterns: [],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
   setupFilesAfterEnv: ['<rootDir>/jest/jest.setup.ts'],
   testEnvironment: 'jsdom',
   modulePaths: ['<rootDir>/src'],
   transform: {
-    '^.+\\.(ts|js|tsx|jsx)$': '@swc/jest',
+    '^.+\\.(ts|js|tsx|jsx)$': [
+      // '@swc/jest' with React autoimport
+      '<rootDir>/jest/react-transformer.js',
+      {
+        jsc: {
+          target: 'es2017',
+          parser: {
+            syntax: 'typescript',
+            tsx: true,
+            decorators: false,
+            dynamicImport: true,
+          },
+          transform: {
+            react: {
+              pragma: 'React.createElement',
+              pragmaFrag: 'React.Fragment',
+              throwIfNamespace: true,
+              development: false,
+              useBuiltins: false,
+              runtime: 'automatic',
+            },
+            hidden: {
+              jest: true,
+            },
+          },
+        },
+      },
+    ],
     '^.+\\.css$': '<rootDir>/jest/style-transformer.js',
     '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)':
       '<rootDir>/jest/file-transformer.js',
