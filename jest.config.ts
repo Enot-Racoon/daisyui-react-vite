@@ -13,7 +13,7 @@ export default {
   modulePaths: ['<rootDir>/src'],
   transform: {
     '^.+\\.(ts|js|tsx|jsx)$': [
-      // '@swc/jest' with React autoimport
+      // '@swc/jest' with React auto import
       '<rootDir>/jest/react-transformer.js',
       {
         jsc: {
