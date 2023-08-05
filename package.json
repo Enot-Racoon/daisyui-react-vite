@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "prebuild": "rimraf dist",
-    "postinstall": "husky install",
+    "prepare": "husky install",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext ts,tsx ",
@@ -17,10 +17,10 @@
     "check": "run-s lint test build"
   },
   "lint-staged": {
-    "*.{ts,tsx,css}": [
+    "src/**/*.{js,jsx,ts,tsx,css,scss,json,html,svg}": [
       "prettier . --write"
     ],
-    "*.{ts,tsx}": [
+    "src/**/*.{js,jsx,ts,tsx}": [
       "yarn run-s lint test"
     ]
   },
