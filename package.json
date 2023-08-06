@@ -8,7 +8,7 @@
     "prepare": "husky install",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx ",
+    "lint": "eslint . --ext ts,tsx",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "lint:watch": "eslint . --ext ts,tsx --fix --watch",
     "test": "NODE_ENV=test jest",
@@ -21,7 +21,8 @@
       "prettier . --write"
     ],
     "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn run-s lint test"
+      "eslint . --fix --ext ts,tsx",
+      "jest --bail --findRelatedTests"
     ]
   },
   "dependencies": {

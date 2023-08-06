@@ -1,0 +1,109 @@
+import questionsRawText from './questions'
+
+const prepare = () => {
+  const ids: Record<string | number, number> = {}
+  const imgs: any[] = []
+
+  const checkImage = /([Q][\d]{1,3}[_]?[\d]{0,1})/
+
+  const questions = questionsRawText.split('\n\n').map(questionRawString => {
+    const [question, ...answers] = questionRawString.split('\n')
+
+    if (!question?.length) {
+      console.error(`Question text length in null: \n${questionRawString}`)
+    }
+
+    if (answers?.length !== 4) {
+      console.error(
+        `Count of Answers should be 4 now it ${answers?.length}/4: \n${questionRawString}`
+      )
+    }
+
+    if (answers.filter(answer => answer.startsWith('*')).length !== 1) {
+      console.error(`Should be only one correct answer: \n${questionRawString}`)
+    }
+
+    const id = parseInt(question.split('.')[0] ?? '', 10)
+    if (isNaN(id) || id < 1) {
+      console.error(`Should have id \n${id}`)
+    }
+
+    if (checkImage.test(question)) {
+      imgs.push(question)
+    }
+
+    answers.forEach(answer => {
+      if (checkImage.test(answer)) {
+        imgs.push(answer)
+      }
+    })
+
+    ids[id] = (ids[id] ?? 0) + 1
+
+    const mapAnswers = (answers: string[]) =>
+      answers.map((answer, key) => {
+        if (checkImage.test(answer)) {
+          const m = checkImage.exec(answer)
+
+          if (m) {
+            const text = answer.replace(m[0], '').trim()
+            const ret = !answer.startsWith('*')
+              ? { id: key + 1, image: `${m[1] ?? ''}.png`, text }
+              : {
+                  id: key + 1,
+                  correct: true,
+                  image: `${m[1] ?? ''}.png`,
+                  text: text.slice(1),
+                }
+
+            if (!ret.text.length) {
+              const { text: _, ...rest } = ret
+              return rest
+            }
+
+            return ret
+          }
+        }
+        return !answer.startsWith('*')
+          ? { id: key + 1, text: answer }
+          : { id: key + 1, correct: true, text: answer.slice(1) }
+      })
+
+    if (checkImage.test(question)) {
+      const m = checkImage.exec(question)
+      if (m) {
+        return {
+          id,
+          text: question.replace(`${id}. `, '').replace(m[0], '').trim(),
+          image: `${m[1] ?? ''}.png`,
+          answers: mapAnswers(answers),
+        }
+      }
+    }
+
+    return {
+      id,
+      text: question.replace(`${id}. `, ''),
+      answers: mapAnswers(answers),
+    }
+  })
+
+  Object.entries(ids).forEach(([key, count]) => {
+    if (count !== 1) {
+      console.error(`Questions id should be uniq: \n${count}`)
+    }
+  })
+
+  // console.log(
+  //   "imgs",
+  //   imgs.map((img) => {
+  //     const matches = checkImage.exec(img);
+  //     return `${matches?.[1] ?? ""}.png`;
+  //   })
+  //   // .join("\n")
+  // );
+
+  return questions
+}
+// prepare();
+console.log('questions', JSON.stringify(prepare()))
