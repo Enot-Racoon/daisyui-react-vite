@@ -16,7 +16,7 @@ export const parseQuestionRawData = (rawText: string): IQuizQuestion => {
   }
 
   const [rawQuestionsText, ...rawAnswers] = trimedText.split(EOL)
-  const [idStrind, text] = rawQuestionsText
+  const [idString, text] = rawQuestionsText
     .trim()
     .split('.')
     .map(s => s.trim())
@@ -31,7 +31,7 @@ export const parseQuestionRawData = (rawText: string): IQuizQuestion => {
     throw new Error(createErrorMessage('less than two answers found - too few'))
   }
 
-  const id = parseInt(idStrind, 10)
+  const id = parseInt(idString, 10)
   if (!id || id < 0) {
     throw new Error(
       createErrorMessage(
@@ -44,11 +44,17 @@ export const parseQuestionRawData = (rawText: string): IQuizQuestion => {
     parseAnswerRawData(rawAnswerData, key + 1)
   )
 
-  // todo: must have more than zero correct answers
-  // todo: remove image tag from text
-  const image = parseImageRawData(text)
+  if (!answers.some(({ correct }) => correct)) {
+    throw new Error(
+      createErrorMessage('no correct answers found must be at least one')
+    )
+  }
 
-  return !image //
-    ? { id, text, answers }
-    : { id, text, image, answers }
+  const imageData = parseImageRawData(text)
+  if (imageData) {
+    const [image, newText] = imageData
+    return { id, text: newText, image, answers }
+  }
+
+  return { id, text, answers }
 }

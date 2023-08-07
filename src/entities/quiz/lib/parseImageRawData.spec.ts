@@ -42,29 +42,37 @@ describe('Testing parser parseImageRawData', () => {
     expect(parseImageRawData(aroundSomeText('Q_12_11'))).toBeNull()
     expect(parseImageRawData(aroundSomeText('Q__12_11_'))).toBeNull()
 
-    expect(parseImageRawData(aroundSomeText('q12'))).toEqual({
-      src: 'q12.png',
-    })
-    expect(parseImageRawData(aroundSomeText('Q12'))).toEqual({
-      src: 'Q12.png',
-    })
-    expect(parseImageRawData(aroundSomeText('Q12_'))).toEqual({
-      src: 'Q12_.png',
-    })
-    expect(parseImageRawData(aroundSomeText('q12_1'))).toEqual({
-      src: 'q12_1.png',
-    })
-    expect(parseImageRawData(aroundSomeText('q12__1'))).toEqual({
-      src: 'q12__1.png',
-    })
-    expect(parseImageRawData(aroundSomeText('q12_11'))).toEqual({
-      src: 'q12_11.png',
-    })
-    expect(parseImageRawData(aroundSomeText('q12_11_'))).toEqual({
-      src: 'q12_11_.png',
-    })
-    expect(parseImageRawData(aroundSomeText('q12_11_1'))).toEqual({
-      src: 'q12_11_1.png',
-    })
+    expect(parseImageRawData(aroundSomeText('q12'))).toEqual([
+      { src: 'q12.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('Q12'))).toEqual([
+      { src: 'Q12.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('Q12_'))).toEqual([
+      { src: 'Q12_.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('q12_1'))).toEqual([
+      { src: 'q12_1.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('q12__1'))).toEqual([
+      { src: 'q12__1.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('q12_11'))).toEqual([
+      { src: 'q12_11.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('q12_11_'))).toEqual([
+      { src: 'q12_11_.png' },
+      'some text',
+    ])
+    expect(parseImageRawData(aroundSomeText('q12_11_1'))).toEqual([
+      { src: 'q12_11_1.png' },
+      'some text',
+    ])
   })
 })

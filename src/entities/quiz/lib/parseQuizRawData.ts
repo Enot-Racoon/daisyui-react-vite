@@ -1,11 +1,10 @@
+import { parseQuestionRawData } from './parseQuestionRawData'
 import type Types from '../types'
 
 /** Empty line delimiter */
 export const ELD = '\n\n'
 
 export const parseQuizRawData = (rawText: string): Types.IQuizQuestion[] => {
-  const quesstions: Types.IQuizQuestion[] = []
-
   const createErrorMessage = (message: string) =>
     `Failed to quiz questions data: ${message}`
 
@@ -21,5 +20,5 @@ export const parseQuizRawData = (rawText: string): Types.IQuizQuestion[] => {
     )
   }
 
-  return quesstions
+  return rawQuestions.map(parseQuestionRawData)
 }

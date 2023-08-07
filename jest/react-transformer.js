@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-var-requires,@typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-return,@typescript-eslint/restrict-template-expressions */
 const swcJest = require('@swc/jest')
 
+// todo: made all jest/*.js to *.ts files
+
 // Wrap '@swc/jest' whit React auto import
 // This is a custom Jest transformer turning file imports into filenames.
 // http://facebook.github.io/jest/docs/en/webpack.html

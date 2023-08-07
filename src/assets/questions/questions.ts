@@ -1,4 +1,4 @@
-const data = `1. If a driver's license is damaged or lost, how long does it take to change it?
+const questions = `1. If a driver's license is damaged or lost, how long does it take to change it?
 30 days
 *15 days
 20 days
@@ -2980,4 +2980,4 @@ Continue driving at the same speed.
 *Slow down and give way to cars turning away.
 Honk the horn to make the car in front accelerate.`
 
-export default data
+export default questions

@@ -6,7 +6,13 @@ const mapTagToImage = (tag: string): IQuizImage => ({
   src: `${tag}.png`,
 })
 
-export const parseImageRawData = (rawText: string): IQuizImage | null => {
+export type ParseImageRawDataResult = [image: IQuizImage, text: string]
+
+export const parseImageRawData = (
+  rawText: string
+): ParseImageRawDataResult | null => {
   const tag = imageTagMatcher.exec(rawText)?.at(0) ?? null
-  return tag ? mapTagToImage(tag) : null
+  return !tag
+    ? null
+    : [mapTagToImage(tag), rawText.replace(` ${tag}`, '').trim()]
 }

@@ -1,7 +1,7 @@
 import { parseAnswerRawData } from './parseAnswerRawData'
 
 describe('Testing parser parseAnswerRawData', () => {
-  it('parse correct/uncorrect data', () => {
+  it('parse correct/uncorrected data', () => {
     expect(() => parseAnswerRawData('', 1)).toThrowError()
     expect(() => parseAnswerRawData(' ', 1)).toThrowError()
     expect(() => parseAnswerRawData(' Answer ', 0)).toThrowError()
