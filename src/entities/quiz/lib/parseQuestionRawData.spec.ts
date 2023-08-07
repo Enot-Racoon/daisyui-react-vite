@@ -1,7 +1,7 @@
 import { parseQuestionRawData, EOL } from './parseQuestionRawData'
 
 describe('Testing parser parseQuestionRawData', () => {
-  it('parse correct/uncorrect data', () => {
+  it('parse correct/uncorrected data', () => {
     expect(() => parseQuestionRawData('')).toThrowError()
     expect(() => parseQuestionRawData(' ')).toThrowError()
     expect(() => parseQuestionRawData('  ABC  ')).toThrowError()
@@ -11,7 +11,12 @@ describe('Testing parser parseQuestionRawData', () => {
     ).toThrowError()
     expect(() =>
       parseQuestionRawData(
-        `  ${[' 2   .   ABC QWERTy ', 'answer1', 'answer2'].join(EOL)}  `
+        `  ${[' 2   .   ABC QWERTY ', 'answer1', 'answer2'].join(EOL)}  `
+      )
+    ).toThrowError()
+    expect(() =>
+      parseQuestionRawData(
+        `  ${[' 2   .   ABC QWERTY ', 'answer1', '* answer2'].join(EOL)}  `
       )
     ).not.toThrowError()
 
@@ -36,7 +41,7 @@ describe('Testing parser parseQuestionRawData', () => {
       )
     ).toEqual({
       id: 2,
-      text: 'ABC Q1', // todo: remove image tag 'Q1'
+      text: 'ABC',
       image: { src: 'Q1.png' },
       answers: [
         { id: 1, image: { src: 'Q1_1.png' } },

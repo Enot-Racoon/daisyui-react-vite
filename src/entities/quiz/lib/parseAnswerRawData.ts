@@ -18,15 +18,16 @@ export const parseAnswerRawData = (
   } else if (!id || id < 0) {
     throw new Error(
       createErrorMessage(
-        'wrong anser id, id must be a number greater than zero'
+        'wrong answer id, id must be a number greater than zero'
       )
     )
   }
 
   const correct = text.startsWith(CAM)
-  const image = parseImageRawData(text)
+  const imageData = parseImageRawData(text)
 
-  if (image) {
+  if (imageData) {
+    const [image] = imageData
     return !correct //
       ? { id, image }
       : { id, image, correct }
