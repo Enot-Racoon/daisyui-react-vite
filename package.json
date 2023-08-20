@@ -8,7 +8,7 @@
     "prepare": "husky install",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext ts,tsx ",
+    "lint": "eslint . --ext ts,tsx",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "lint:watch": "eslint . --ext ts,tsx --fix --watch",
     "test": "NODE_ENV=test jest",
@@ -21,7 +21,8 @@
       "prettier . --write"
     ],
     "src/**/*.{js,jsx,ts,tsx}": [
-      "yarn run-s lint test"
+      "eslint . --fix --ext ts,tsx",
+      "jest --bail --findRelatedTests"
     ]
   },
   "dependencies": {
@@ -43,7 +44,6 @@
     "@vitejs/plugin-react": "^4.0.4",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "autoprefixer": "^10.4.14",
-    "camelcase": "6",
     "daisyui": "^3.5.1",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.10.0",
